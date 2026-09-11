@@ -1,191 +1,262 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import "./css/Home.css";
 
+const products = [
+  {
+    id: 1,
+    name: "Premium Sneakers",
+    price: "$79.99",
+    oldPrice: "$99.99",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+  },
+  {
+    id: 2,
+    name: "Classic Watch",
+    price: "$129.99",
+    oldPrice: "$159.99",
+    image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d",
+  },
+  {
+    id: 3,
+    name: "Leather Backpack",
+    price: "$59.99",
+    oldPrice: "$79.99",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+  },
+  {
+    id: 4,
+    name: "Wireless Headphones",
+    price: "$89.99",
+    oldPrice: "$119.99",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+  },
+];
+
+const reviews = [
+  {
+    name: "Sarah Johnson",
+    text: "Amazing products and super fast delivery. I absolutely love shopping here!",
+  },
+  {
+    name: "Michael Brown",
+    text: "The quality is excellent and the prices are very reasonable. Highly recommended.",
+  },
+  {
+    name: "Emily Davis",
+    text: "Great shopping experience. The website is easy to use and my order arrived quickly.",
+  },
+];
+
 function Home() {
-  const categories = [
-    {
-      title: "Electronics",
-      description: "Discover the latest gadgets and smart technology.",
-      icon: "💻",
-    },
-    {
-      title: "Fashion",
-      description: "Upgrade your style with modern trends.",
-      icon: "👕",
-    },
-    {
-      title: "Home & Living",
-      description: "Beautiful essentials for a comfortable home.",
-      icon: "🏠",
-    },
-    {
-      title: "Beauty",
-      description: "Premium products for your everyday routine.",
-      icon: "✨",
-    },
-  ];
-
-  const features = [
-    {
-      icon: "🚚",
-      title: "Fast & Reliable Delivery",
-      description: "Get your orders delivered safely and on time.",
-    },
-    {
-      icon: "🔒",
-      title: "Secure Payments",
-      description: "Your payments and personal information are protected.",
-    },
-    {
-      icon: "↩️",
-      title: "Easy Returns",
-      description: "Shop confidently with our simple return policy.",
-    },
-    {
-      icon: "💬",
-      title: "24/7 Support",
-      description: "Our support team is always ready to help.",
-    },
-  ];
-
   return (
-    <main>
+    <div className="home">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <span className="hero-badge">✨ New Collection Available</span>
+          <span className="hero-small-title">WELCOME TO SHOPZONE</span>
 
           <h1>
-            Everything You Need.
+            Shop Smart.
             <br />
-            <span>All in One Place.</span>
+            Live Better.
           </h1>
 
           <p>
-            Discover quality products, unbeatable deals, and a seamless shopping
-            experience designed just for you.
+            Discover premium products at amazing prices. Find everything you
+            need in one place.
           </p>
 
           <div className="hero-buttons">
-            <Link to="/shop" className="btn btn-primary">
-              Shop Now →
-            </Link>
+            <a href="#products" className="btn primary-btn">
+              Shop Now
+            </a>
 
-            <Link to="/about" className="btn btn-secondary">
-              Learn More
-            </Link>
-          </div>
-
-          <div className="hero-trust">
-            <span>✓ Quality Products</span>
-            <span>✓ Best Prices</span>
-            <span>✓ Fast Delivery</span>
+            <a href="#sale" className="btn secondary-btn">
+              View Sale
+            </a>
           </div>
         </div>
 
         <div className="hero-image">
-          <div className="hero-image-card">
-            <span>🔥</span>
-            <strong>Trending Products</strong>
-            <small>Shop our latest arrivals</small>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8"
+            alt="Shopping"
+          />
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="categories">
-        <div className="section-header">
-          <div>
-            <span className="section-label">EXPLORE</span>
-            <h2>Shop by Category</h2>
-          </div>
-
-          <Link to="/shop" className="view-all">
-            View All →
-          </Link>
-        </div>
-
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Link to="/shop" className="category-card" key={category.title}>
-              <div className="category-icon">{category.icon}</div>
-
-              <h3>{category.title}</h3>
-
-              <p>{category.description}</p>
-
-              <span className="category-link">Explore Category →</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Promotional Banner */}
-      <section className="promo-banner">
-        <div className="promo-content">
-          <span className="promo-label">LIMITED TIME OFFER</span>
-
-          <h2>Get up to 40% OFF</h2>
-
-          <p>Save more on selected products while the offer lasts.</p>
-
-          <Link to="/shop" className="btn btn-light">
-            Shop the Sale →
-          </Link>
-        </div>
-
-        <div className="promo-decoration">%</div>
-      </section>
-
-      {/* Features Section */}
+      {/* Features */}
       <section className="features">
-        <div className="section-header centered">
-          <span className="section-label">WHY CHOOSE US</span>
-          <h2>Shopping Made Simple</h2>
-          <p>
-            Everything we do is designed to make your shopping experience
-            better.
-          </p>
+        <div className="feature">
+          <span>🚚</span>
+          <div>
+            <h3>Free Shipping</h3>
+            <p>On orders over $50</p>
+          </div>
         </div>
 
-        <div className="features-grid">
-          {features.map((feature) => (
-            <div className="feature-card" key={feature.title}>
-              <div className="feature-icon">{feature.icon}</div>
+        <div className="feature">
+          <span>🔒</span>
+          <div>
+            <h3>Secure Payment</h3>
+            <p>100% secure checkout</p>
+          </div>
+        </div>
 
-              <h3>{feature.title}</h3>
+        <div className="feature">
+          <span>↩️</span>
+          <div>
+            <h3>Easy Returns</h3>
+            <p>30-day return policy</p>
+          </div>
+        </div>
 
-              <p>{feature.description}</p>
+        <div className="feature">
+          <span>💬</span>
+          <div>
+            <h3>24/7 Support</h3>
+            <p>We're here to help</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section className="products-section" id="products">
+        <div className="section-heading">
+          <span>OUR COLLECTION</span>
+          <h2>Featured Products</h2>
+          <p>Explore our most popular products</p>
+        </div>
+
+        <div className="products-grid">
+          {products.map((product) => (
+            <div className="product-card" key={product.id}>
+              <div className="product-image">
+                <img src={product.image} alt={product.name} />
+
+                <span className="product-badge">SALE</span>
+
+                <button className="wishlist">♡</button>
+              </div>
+
+              <div className="product-info">
+                <h3>{product.name}</h3>
+
+                <div className="rating">★★★★★</div>
+
+                <div className="price">
+                  <span className="current-price">{product.price}</span>
+
+                  <span className="old-price">{product.oldPrice}</span>
+                </div>
+
+                <button className="cart-btn">Add to Cart</button>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="newsletter">
-        <div className="newsletter-content">
-          <span className="section-label">STAY UPDATED</span>
+      {/* Sale Banner */}
+      <section className="sale-section" id="sale">
+        <div className="sale-content">
+          <span>LIMITED TIME OFFER</span>
 
-          <h2>Get the Latest Deals</h2>
+          <h2>
+            Big Sale.
+            <br />
+            Up To 50% Off.
+          </h2>
 
           <p>
-            Subscribe to our newsletter and be the first to know about new
-            products, exclusive offers, and special discounts.
+            Don't miss our biggest sale of the season. Grab your favorite
+            products before they're gone.
           </p>
 
-          <form className="newsletter-form">
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              aria-label="Email address"
-              required
-            />
+          <button className="sale-btn">Shop Sale →</button>
+        </div>
 
-            <button type="submit">Subscribe</button>
-          </form>
+        <div className="sale-discount">
+          <strong>50%</strong>
+          <span>OFF</span>
         </div>
       </section>
-    </main>
+
+      {/* Reviews */}
+      <section className="reviews-section">
+        <div className="section-heading">
+          <span>TESTIMONIALS</span>
+          <h2>What Our Clients Say</h2>
+          <p>Thousands of happy customers shop with us every day.</p>
+        </div>
+
+        <div className="reviews-grid">
+          {reviews.map((review, index) => (
+            <div className="review-card" key={index}>
+              <div className="review-stars">★★★★★</div>
+
+              <p>"{review.text}"</p>
+
+              <div className="review-user">
+                <div className="avatar">{review.name.charAt(0)}</div>
+
+                <div>
+                  <h4>{review.name}</h4>
+                  <span>Verified Customer</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="contact-section" id="contact">
+        <div className="contact-info">
+          <span>GET IN TOUCH</span>
+
+          <h2>
+            Have a question?
+            <br />
+            We'd love to hear from you.
+          </h2>
+
+          <p>
+            Our support team is always ready to help. Send us a message and
+            we'll get back to you as soon as possible.
+          </p>
+
+          <div className="contact-details">
+            <div>
+              <span>📧</span>
+              <p>support@shopzone.com</p>
+            </div>
+
+            <div>
+              <span>📞</span>
+              <p>+1 234 567 890</p>
+            </div>
+
+            <div>
+              <span>📍</span>
+              <p>123 Market Street, New York</p>
+            </div>
+          </div>
+        </div>
+
+        <form className="contact-form">
+          <input type="text" placeholder="Your Name" required />
+
+          <input type="email" placeholder="Your Email" required />
+
+          <input type="text" placeholder="Subject" />
+
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+
+          <button type="submit">Send Message →</button>
+        </form>
+      </section>
+    </div>
   );
 }
 
