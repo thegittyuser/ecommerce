@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     subject: "",
     message: "",
@@ -23,7 +23,7 @@ function Contact() {
     alert("Thank you! Your message has been sent.");
 
     setFormData({
-      name: "",
+      username: "",
       email: "",
       subject: "",
       message: "",
@@ -75,9 +75,9 @@ function Contact() {
 
           <input
             type="text"
-            name="name"
+            name="username"
             placeholder="Your Name"
-            value={formData.name}
+            value={formData.username}
             onChange={handleChange}
             required
           />
