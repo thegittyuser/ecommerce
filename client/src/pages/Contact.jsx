@@ -8,6 +8,8 @@ function Contact() {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -15,31 +17,50 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Contact Form:", formData);
+    try {
+      setLoading(true);
 
-    alert("Thank you! Your message has been sent.");
+      const response = await fetch("http://localhost:3000/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setFormData({
-      username: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+      const data = await response.json();
+
+      if (data.ok) {
+        alert(data.message);
+
+        setFormData({
+          username: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="contact-page">
-      {/* Header */}
       <section className="page-header">
         <h1>Contact Us</h1>
         <p>Have a question? We'd love to hear from you.</p>
       </section>
 
       <section className="contact-container">
-        {/* Contact Information */}
         <div className="contact-info">
           <h2>Get In Touch</h2>
 
@@ -69,7 +90,6 @@ function Contact() {
           </div>
         </div>
 
-        {/* Contact Form */}
         <form className="contact-form" onSubmit={handleSubmit}>
           <h2>Send Us a Message</h2>
 
@@ -109,7 +129,9 @@ function Contact() {
             required
           />
 
-          <button type="submit">Send Message</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Sending..." : "Send Message"}
+          </button>
         </form>
       </section>
     </div>

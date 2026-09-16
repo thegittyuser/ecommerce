@@ -1,6 +1,6 @@
 import userModel from "../models/user.model.js";
 
-const submit = async (req, res) => {
+export const submit = async (req, res) => {
   try {
     const { username, email, subject, message } = req.body;
 
