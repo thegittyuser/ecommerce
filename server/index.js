@@ -1,9 +1,19 @@
 import express from "express";
+import cors from "cors";
 import DbConnect from "./config/dbconn.js";
 import router from "./routes/user.route.js";
 
 const app = express();
 const PORT = 3000; // Added 'const' to declare the variable
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
   console.log("default page");
@@ -11,7 +21,6 @@ app.get("/", function (req, res) {
 });
 
 app.use("/", router);
-
 DbConnect();
 
 const startServer = () => {
