@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Premium Sneakers",
+      "price": "$79.99",
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+    },
+    {
+      "id": 2,
+      "name": "Classic Watch",
+      "price": "$129.99",
+      "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d"
+    },
+    {
+      "id": 3,
+      "name": "Leather Backpack",
+      "price": "$59.99",
+      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
+    },
+    {
+      "id": 4,
+      "name": "Wireless Headphones",
+      "price": "$89.99",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+    },
+    {
+      "id": 5,
+      "name": "Casual T-Shirt",
+      "price": "$29.99",
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+    },
+    {
+      "id": 6,
+      "name": "Denim Jacket",
+      "price": "$69.99",
+      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5"
+    },
+    {
+      "id": 7,
+      "name": "Running Shoes",
+      "price": "$99.99",
+      "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3"
+    },
+    {
+      "id": 8,
+      "name": "Travel Bag",
+      "price": "$74.99",
+      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
+    }
+  ]
+}
