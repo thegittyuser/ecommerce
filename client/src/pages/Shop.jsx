@@ -1,7 +1,20 @@
 import React from "react";
 import "./css/Shop.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Shop() {
+  const [product, setProduct] = useState("No Valid Data");
+
+  useEffect(() => {
+    const respose = fetch("http://localhost:3000/products").then((res) =>
+      res
+        .json()
+        .then((data) => setProduct(data))
+        .catch((error) => console.error(error)),
+    );
+  }, [product]);
+
   return (
     <main className="shop-page">
       {/* Breadcrumb */}
