@@ -4,16 +4,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function Shop() {
-  const [product, setProduct] = useState("No Valid Data");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const respose = fetch("http://localhost:3000/products").then((res) =>
       res
         .json()
-        .then((data) => setProduct(data))
+        .then((data) => setProducts(data))
         .catch((error) => console.error(error)),
     );
-  }, [product]);
+  }, []);
 
   return (
     <main className="shop-page">
@@ -47,10 +47,10 @@ function Shop() {
         </div>
 
         <div className="shop-grid">
-          {products.map((product) => (
-            <div className="shop-product-card" key={product.id}>
+          {products.map((products) => (
+            <div className="shop-product-card" key={products.id}>
               <div className="shop-product-image">
-                <img src={product.image} alt={product.name} />
+                <img src={products.image} alt={products.name} />
 
                 <span className="sale-badge">SALE</span>
 
@@ -60,9 +60,9 @@ function Shop() {
               <div className="shop-product-info">
                 <div className="product-rating">★★★★★</div>
 
-                <h3>{product.name}</h3>
+                <h3>{products.name}</h3>
 
-                <p className="product-price">{product.price}</p>
+                <p className="product-price">{products.price}</p>
 
                 <button className="add-cart-btn">Add to Cart</button>
               </div>
