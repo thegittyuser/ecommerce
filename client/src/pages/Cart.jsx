@@ -2,63 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/Cart.css";
 
-const initialCart = [
-  {
-    id: 1,
-    name: "Premium Sneakers",
-    price: 79.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-  },
-  {
-    id: 2,
-    name: "Classic Watch",
-    price: 129.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d",
-  },
-  {
-    id: 3,
-    name: "Leather Backpack",
-    price: 59.99,
-    quantity: 2,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
-  },
-];
-
 function Cart() {
-  const [cartItems, setCartItems] = useState(initialCart);
-
-  const increaseQuantity = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
-  };
-
-  const decreaseQuantity = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
-
-  const shipping = subtotal > 100 ? 0 : 10;
-  const total = subtotal + shipping;
-
+  const [cartItems, setCartItems] = useState([]);
   return (
     <main className="cart-page">
       {/* Breadcrumb */}
