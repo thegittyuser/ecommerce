@@ -24,3 +24,20 @@ export const cart = async (req, res) => {
       .json({ ok: true, message: "Internal Server Error." });
   }
 };
+
+export const fetchCart = async (req, res) => {
+  try {
+    const cartItem = await cartModel.find();
+
+    return res.status(201).json({
+      ok: true,
+      message: "Product Fetching In Cart Is Successful.",
+      cartItem,
+    });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ ok: true, message: "Internal Server Error." });
+  }
+};
