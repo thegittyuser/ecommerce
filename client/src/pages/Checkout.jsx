@@ -1,33 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Checkout.css";
 
-const cartItems = [
-  {
-    id: 1,
-    name: "Premium Sneakers",
-    price: 79.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-  },
-  {
-    id: 2,
-    name: "Classic Watch",
-    price: 129.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d",
-  },
-  {
-    id: 3,
-    name: "Leather Backpack",
-    price: 59.99,
-    quantity: 2,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
-  },
-];
-
 function Checkout() {
-  const [paymentMethod, setPaymentMethod] = useState("card");
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,24 +12,31 @@ function Checkout() {
     city: "",
     postalCode: "",
     orderNotes: "",
-
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    cardName: "",
-
     termsAccepted: false,
   });
 
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
+  const [cartItems, setCartItems] = useState([]);
 
-  const shipping = subtotal >= 100 ? 0 : 10;
-  const total = subtotal + shipping;
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
-  // Handle input changes
+  const fetchCart = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/fetchcart");
+      const data = await response.json();
+
+      if (data.ok) {
+        setCartItems(data.cartItem);
+        console.log(data.message);
+      } else {
+        console.log(data.message);
+      }
+    } catch (err) {
+      console.error("Error fetching cart:", err);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -65,12 +46,15 @@ function Checkout() {
     }));
   };
 
-  // Handle payment method
-  const handlePaymentMethod = (e) => {
-    setPaymentMethod(e.target.value);
-  };
+  const subtotal = cartItems.reduce(
+    (total, item) =>
+      total + Number(item.price || 0) * Number(item.quantity || 1),
+    0,
+  );
 
-  // Submit form
+  const shipping = 0;
+  const total = subtotal + shipping;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -91,7 +75,7 @@ function Checkout() {
 
       orderNotes: formData.orderNotes,
 
-      paymentMethod,
+      paymentMethod: "cash",
 
       products: cartItems,
 
@@ -103,14 +87,10 @@ function Checkout() {
     };
 
     console.log("ORDER DATA:", orderData);
-
-    // Later send this to your MERN backend:
-    // axios.post("http://localhost:5000/api/orders", orderData);
   };
 
   return (
     <main className="checkout-page">
-      {/* Breadcrumb */}
       <section className="checkout-breadcrumb">
         <div className="checkout-breadcrumb-content">
           <h1>Checkout</h1>
@@ -125,7 +105,6 @@ function Checkout() {
         </div>
       </section>
 
-      {/* Checkout */}
       <section className="checkout-section">
         <form className="checkout-form" onSubmit={handleSubmit}>
           {/* Billing Details */}
@@ -135,7 +114,6 @@ function Checkout() {
               <h2>Billing Details</h2>
             </div>
 
-            {/* First + Last Name */}
             <div className="form-row">
               <div className="form-group">
                 <label>
@@ -168,7 +146,6 @@ function Checkout() {
               </div>
             </div>
 
-            {/* Email */}
             <div className="form-group">
               <label>
                 Email Address <span>*</span>
@@ -184,7 +161,6 @@ function Checkout() {
               />
             </div>
 
-            {/* Phone */}
             <div className="form-group">
               <label>
                 Phone Number <span>*</span>
@@ -200,7 +176,6 @@ function Checkout() {
               />
             </div>
 
-            {/* Country */}
             <div className="form-group">
               <label>
                 Country <span>*</span>
@@ -223,7 +198,6 @@ function Checkout() {
               </select>
             </div>
 
-            {/* Address */}
             <div className="form-group">
               <label>
                 Address <span>*</span>
@@ -239,7 +213,6 @@ function Checkout() {
               />
             </div>
 
-            {/* City + Postal Code */}
             <div className="form-row">
               <div className="form-group">
                 <label>
@@ -272,7 +245,6 @@ function Checkout() {
               </div>
             </div>
 
-            {/* Notes */}
             <div className="form-group">
               <label>Order Notes</label>
 
@@ -293,96 +265,18 @@ function Checkout() {
               <h2>Payment Method</h2>
             </div>
 
-            {/* Card Payment */}
-            <label
-              className={`payment-option ${
-                paymentMethod === "card" ? "selected" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="payment"
-                value="card"
-                checked={paymentMethod === "card"}
-                onChange={handlePaymentMethod}
-              />
-
-              <div className="payment-option-content">
-                <div className="payment-title">
-                  <strong>Credit / Debit Card</strong>
-                  <span>💳</span>
-                </div>
-
-                {paymentMethod === "card" && (
-                  <div className="card-fields">
-                    <input
-                      type="text"
-                      name="cardNumber"
-                      value={formData.cardNumber}
-                      onChange={handleChange}
-                      placeholder="Card number"
-                      maxLength="19"
-                    />
-
-                    <div className="form-row">
-                      <input
-                        type="text"
-                        name="expiryDate"
-                        value={formData.expiryDate}
-                        onChange={handleChange}
-                        placeholder="MM / YY"
-                        maxLength="5"
-                      />
-
-                      <input
-                        type="text"
-                        name="cvv"
-                        value={formData.cvv}
-                        onChange={handleChange}
-                        placeholder="CVV"
-                        maxLength="4"
-                      />
-                    </div>
-
-                    <input
-                      type="text"
-                      name="cardName"
-                      value={formData.cardName}
-                      onChange={handleChange}
-                      placeholder="Name on card"
-                    />
-                  </div>
-                )}
-              </div>
-            </label>
-
-            {/* Cash On Delivery */}
-            <label
-              className={`payment-option ${
-                paymentMethod === "cash" ? "selected" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="payment"
-                value="cash"
-                checked={paymentMethod === "cash"}
-                onChange={handlePaymentMethod}
-              />
-
+            <div className="payment-option selected">
               <div className="payment-option-content">
                 <div className="payment-title">
                   <strong>Cash on Delivery</strong>
                   <span>💵</span>
                 </div>
 
-                {paymentMethod === "cash" && (
-                  <p className="payment-description">
-                    Pay with cash when your order is delivered.
-                  </p>
-                )}
+                <p className="payment-description">
+                  Pay with cash when your order is delivered.
+                </p>
               </div>
-            </label>
+            </div>
           </div>
 
           {/* Terms */}
@@ -415,22 +309,27 @@ function Checkout() {
           </div>
 
           <div className="checkout-items">
-            {cartItems.map((item) => (
-              <div className="checkout-item" key={item.id}>
-                <div className="checkout-item-image">
-                  <img src={item.image} alt={item.name} />
+            {cartItems.map((item) => {
+              const quantity = Number(item.quantity || 1);
+              const itemTotal = Number(item.price || 0) * quantity;
 
-                  <span className="item-quantity">{item.quantity}</span>
+              return (
+                <div className="checkout-item" key={item.id}>
+                  <div className="checkout-item-image">
+                    <img src={item.image} alt={item.title} />
+
+                    <span className="item-quantity">{quantity}</span>
+                  </div>
+
+                  <div className="checkout-item-info">
+                    <h3>{item.title}</h3>
+                    <p>${Number(item.price || 0).toFixed(2)}</p>
+                  </div>
+
+                  <strong>${itemTotal.toFixed(2)}</strong>
                 </div>
-
-                <div className="checkout-item-info">
-                  <h3>{item.name}</h3>
-                  <p>${item.price.toFixed(2)}</p>
-                </div>
-
-                <strong>${(item.price * item.quantity).toFixed(2)}</strong>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="summary-divider"></div>
@@ -442,9 +341,8 @@ function Checkout() {
 
           <div className="summary-row">
             <span>Shipping</span>
-
             <strong>
-              {shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+              {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
             </strong>
           </div>
 
@@ -452,7 +350,6 @@ function Checkout() {
 
           <div className="checkout-total">
             <span>Total</span>
-
             <strong>${total.toFixed(2)}</strong>
           </div>
 
@@ -461,7 +358,7 @@ function Checkout() {
 
             <div>
               <strong>Secure Checkout</strong>
-              <p>Your payment information is encrypted and secure.</p>
+              <p>Your order information is secure.</p>
             </div>
           </div>
         </aside>

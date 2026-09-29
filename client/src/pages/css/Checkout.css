@@ -9,8 +9,8 @@
 }
 
 /* =========================
-     BREADCRUMB
-  ========================= */
+   BREADCRUMB
+========================= */
 
 .checkout-breadcrumb {
   background: #f7f7f5;
@@ -51,8 +51,8 @@
 }
 
 /* =========================
-     CHECKOUT SECTION
-  ========================= */
+   CHECKOUT SECTION
+========================= */
 
 .checkout-section {
   max-width: 1400px;
@@ -68,8 +68,8 @@
 }
 
 /* =========================
-     FORM
-  ========================= */
+   FORM
+========================= */
 
 .checkout-form {
   display: flex;
@@ -107,8 +107,8 @@
 }
 
 /* =========================
-     FORM FIELDS
-  ========================= */
+   FORM FIELDS
+========================= */
 
 .form-row {
   display: grid;
@@ -165,8 +165,8 @@
 }
 
 /* =========================
-     PAYMENT
-  ========================= */
+   PAYMENT
+========================= */
 
 .payment-card {
   padding-bottom: 15px;
@@ -199,11 +199,6 @@
   background: #fffaf8;
 }
 
-.payment-option > input {
-  margin-top: 4px;
-  accent-color: #ff5a36;
-}
-
 .payment-option-content {
   flex: 1;
 }
@@ -220,34 +215,6 @@
   font-size: 20px;
 }
 
-.card-fields {
-  margin-top: 20px;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 12px;
-}
-
-.card-fields input {
-  width: 100%;
-
-  padding: 13px;
-
-  border: 1px solid #ddd;
-  border-radius: 5px;
-
-  outline: none;
-}
-
-.card-fields input:focus {
-  border-color: #ff5a36;
-}
-
-.card-fields .form-row {
-  width: 100%;
-}
-
 .payment-description {
   color: #777;
 
@@ -258,8 +225,8 @@
 }
 
 /* =========================
-     SUMMARY
-  ========================= */
+   SUMMARY
+========================= */
 
 .checkout-summary {
   padding: 30px;
@@ -278,14 +245,53 @@
 }
 
 /* =========================
-     CHECKOUT ITEMS
-  ========================= */
+   CHECKOUT ITEMS
+========================= */
 
 .checkout-items {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  /* Show approximately 3 items */
+  max-height: 255px;
+
+  /* Enable scrolling when more than 3 items */
+  overflow-y: auto;
+
+  /* Prevent horizontal scrollbar */
+  overflow-x: hidden;
+
+  /* Space for scrollbar */
+  padding-right: 8px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f1f1f1;
 }
+
+/* Chrome / Edge / Safari scrollbar */
+
+.checkout-items::-webkit-scrollbar {
+  width: 5px;
+}
+
+.checkout-items::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.checkout-items::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.checkout-items::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* =========================
+   CHECKOUT ITEM
+========================= */
 
 .checkout-item {
   display: grid;
@@ -294,6 +300,8 @@
   gap: 12px;
 
   align-items: center;
+
+  flex-shrink: 0;
 }
 
 .checkout-item-image {
@@ -311,6 +319,7 @@
 .checkout-item-image img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
@@ -338,23 +347,35 @@
   font-weight: 700;
 }
 
+.checkout-item-info {
+  min-width: 0;
+}
+
 .checkout-item-info h3 {
   font-size: 13px;
+
   margin-bottom: 5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .checkout-item-info p {
   color: #777;
+
   font-size: 12px;
 }
 
 .checkout-item > strong {
   font-size: 14px;
+
+  white-space: nowrap;
 }
 
 /* =========================
-     SUMMARY ROWS
-  ========================= */
+   SUMMARY ROWS
+========================= */
 
 .summary-divider {
   height: 1px;
@@ -395,12 +416,13 @@
 
 .checkout-total strong {
   color: #ff5a36;
+
   font-size: 25px;
 }
 
 /* =========================
-     SECURE PAYMENT
-  ========================= */
+   SECURE PAYMENT
+========================= */
 
 .secure-payment {
   display: flex;
@@ -433,8 +455,8 @@
 }
 
 /* =========================
-     TERMS
-  ========================= */
+   TERMS
+========================= */
 
 .terms {
   display: flex;
@@ -452,17 +474,19 @@
 
 .terms input {
   margin-top: 3px;
+
   accent-color: #ff5a36;
 }
 
 .terms a {
   color: #171717;
+
   font-weight: 600;
 }
 
 /* =========================
-     PLACE ORDER
-  ========================= */
+   PLACE ORDER
+========================= */
 
 .place-order-btn {
   width: 100%;
@@ -488,8 +512,8 @@
 }
 
 /* =========================
-     TABLET
-  ========================= */
+   TABLET
+========================= */
 
 @media (max-width: 1050px) {
   .checkout-section {
@@ -498,13 +522,16 @@
 
   .checkout-summary {
     position: static;
+
     max-width: 600px;
+
+    width: 100%;
   }
 }
 
 /* =========================
-     MOBILE
-  ========================= */
+   MOBILE
+========================= */
 
 @media (max-width: 700px) {
   .checkout-breadcrumb {
@@ -513,7 +540,9 @@
 
   .checkout-breadcrumb-content {
     flex-direction: column;
+
     align-items: flex-start;
+
     gap: 15px;
   }
 
@@ -523,6 +552,7 @@
 
   .checkout-section {
     padding: 60px 6%;
+
     gap: 30px;
   }
 
@@ -533,12 +563,17 @@
 
   .form-row {
     grid-template-columns: 1fr;
+
     gap: 0;
   }
 
   .checkout-heading h2,
   .summary-header h2 {
     font-size: 25px;
+  }
+
+  .checkout-items {
+    max-height: 245px;
   }
 
   .checkout-item {
@@ -551,6 +586,10 @@
   }
 }
 
+/* =========================
+   SMALL MOBILE
+========================= */
+
 @media (max-width: 400px) {
   .checkout-section {
     padding-left: 4%;
@@ -560,5 +599,24 @@
   .checkout-card,
   .checkout-summary {
     padding: 18px;
+  }
+
+  .checkout-items {
+    max-height: 235px;
+  }
+
+  .checkout-item {
+    grid-template-columns: 55px 1fr auto;
+
+    gap: 10px;
+  }
+
+  .checkout-item-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  .checkout-item > strong {
+    font-size: 12px;
   }
 }
